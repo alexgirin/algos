@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLinearSearchInt(t *testing.T) {
+func TestBinarySearchInt(t *testing.T) {
 	tests := []struct {
 		title  string
 		input  *TestInput[int]
@@ -32,13 +32,13 @@ func TestLinearSearchInt(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.title, func(t *testing.T) {
-			result := Linear[int](&test.input.haystack, test.input.needle)
+			result := Binary(&test.input.haystack, test.input.needle)
 			assert.Equal(t, test.result, result)
 		})
 	}
 }
 
-func TestLinearSearchString(t *testing.T) {
+func TestBinarySearchString(t *testing.T) {
 	tests := []struct {
 		title  string
 		input  *TestInput[string]
@@ -64,7 +64,7 @@ func TestLinearSearchString(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.title, func(t *testing.T) {
-			result := Linear[string](&test.input.haystack, test.input.needle)
+			result := Binary[string](&test.input.haystack, test.input.needle)
 			assert.Equal(t, test.result, result)
 		})
 	}
