@@ -101,3 +101,17 @@ func TestLinkedListDequeue(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Equal(t, 0, val)
 }
+
+func TestLinkedListContains(t *testing.T) {
+	list := New[int]()
+
+	assert.False(t, list.Contains(0))
+
+	list.Push(10)
+	list.Push(20)
+
+	assert.False(t, list.Contains(0))
+	assert.True(t, list.Contains(10))
+	assert.True(t, list.Contains(20))
+	assert.False(t, list.Contains(30))
+}

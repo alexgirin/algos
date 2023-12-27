@@ -108,3 +108,19 @@ func (list *LinkedList[T]) Dequeue() (T, error) {
 
 	return cur.value, nil
 }
+
+func (list *LinkedList[T]) Contains(val T) bool {
+	if list.isEmpty() {
+		return false
+	}
+
+	cur := list.head
+	for cur.next != nil {
+		if cur.next.value == val {
+			return true
+		}
+		cur = cur.next
+	}
+
+	return false
+}
