@@ -15,7 +15,7 @@ func Binary[T cmp.Ordered](haystack *[]T, needle T) int {
 		if needle > (*haystack)[mid] {
 			low = mid + 1
 		} else {
-			high = mid
+			high = mid - 1
 		}
 	}
 

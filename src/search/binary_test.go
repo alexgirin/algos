@@ -15,16 +15,16 @@ func TestBinarySearchInt(t *testing.T) {
 		{
 			"True",
 			&TestInput[int]{
-				haystack: []int{1, 2, 3, 4, 5},
-				needle:   2,
+				haystack: []int{-1, 0, 3, 5, 9, 12},
+				needle:   9,
 			},
-			1,
+			4,
 		},
 		{
 			"False",
 			&TestInput[int]{
-				haystack: []int{1, 2, 3, 4, 5},
-				needle:   7,
+				haystack: []int{-1, 0, 3, 5, 9, 12},
+				needle:   2,
 			},
 			-1,
 		},
