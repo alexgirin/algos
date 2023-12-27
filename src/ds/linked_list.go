@@ -138,7 +138,5 @@ func (list *LinkedList[T]) ToSlice() []T {
 		cur = cur.next
 	}
 
-	fmt.Printf("array: %v", arr)
-
 	return arr
 }
