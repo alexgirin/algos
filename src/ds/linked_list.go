@@ -124,3 +124,21 @@ func (list *LinkedList[T]) Contains(val T) bool {
 
 	return false
 }
+
+func (list *LinkedList[T]) ToSlice() []T {
+	arr := []T{}
+
+	if list.isEmpty() {
+		return arr
+	}
+
+	cur := list.head
+	for cur.next != nil {
+		arr = append(arr, cur.next.value)
+		cur = cur.next
+	}
+
+	fmt.Printf("array: %v", arr)
+
+	return arr
+}

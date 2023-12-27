@@ -1,6 +1,7 @@
 package ds
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -114,4 +115,16 @@ func TestLinkedListContains(t *testing.T) {
 	assert.True(t, list.Contains(10))
 	assert.True(t, list.Contains(20))
 	assert.False(t, list.Contains(30))
+}
+
+func TestLinkedListToSlice(t *testing.T) {
+	list := New[int]()
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{}))
+
+	list.Push(10)
+	list.Push(20)
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{10, 20}))
+
+	list.Enqueue(30)
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{30, 10, 20}))
 }
