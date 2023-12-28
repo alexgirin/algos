@@ -64,10 +64,11 @@ func (list *LinkedList[T]) Push(val T) {
 	for cur.next != nil {
 		cur = cur.next
 	}
+
 	cur.next = node
 }
 
-func (list *LinkedList[T]) Pop() (val T, err error) {
+func (list *LinkedList[T]) Pop() (T, error) {
 	if list.isEmpty() {
 		return list.head.value, fmt.Errorf("error: %s", "Empty linked list")
 	}
@@ -76,7 +77,7 @@ func (list *LinkedList[T]) Pop() (val T, err error) {
 	for cur.next.next != nil {
 		cur = cur.next
 	}
-	val = cur.next.value
+	val := cur.next.value
 	cur.next = nil
 	list.length--
 
@@ -130,24 +131,22 @@ func (list *LinkedList[T]) Dequeue() (T, error) {
 	return cur.value, nil
 }
 
-func (list *LinkedList[T]) Delete(index int) (val T, err error) {
+func (list *LinkedList[T]) Delete(index int) (T, error) {
 	if index < 0 || index > list.length-1 {
 		return list.head.value, fmt.Errorf("error: %s", "Index is out of range")
 	}
 
 	cur := list.head
-
 	for i := 0; i < index; i++ {
 		cur = cur.next
 	}
 
-	val = cur.next.value
 	toDelete := cur.next
-	cur.next = cur.next.next
+	cur.next = toDelete.next
 	toDelete.next = nil
 	list.length--
 
-	return val, nil
+	return toDelete.value, nil
 }
 
 func (list *LinkedList[T]) Contains(val T) bool {
