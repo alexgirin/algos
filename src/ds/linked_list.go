@@ -15,7 +15,7 @@ type LinkedList[T cmp.Ordered] struct {
 	length int
 }
 
-func New[T cmp.Ordered]() *LinkedList[T] {
+func NewLinkedList[T cmp.Ordered]() *LinkedList[T] {
 	return &LinkedList[T]{
 		head:   &listNode[T]{},
 		length: 0,
@@ -67,7 +67,7 @@ func (list *LinkedList[T]) Push(val T) {
 	cur.next = node
 }
 
-func (list *LinkedList[T]) Pop() (T, error) {
+func (list *LinkedList[T]) Pop() (val T, err error) {
 	if list.isEmpty() {
 		return list.head.value, fmt.Errorf("error: %s", "Empty linked list")
 	}
@@ -76,11 +76,32 @@ func (list *LinkedList[T]) Pop() (T, error) {
 	for cur.next.next != nil {
 		cur = cur.next
 	}
-	val := cur.next.value
+	val = cur.next.value
 	cur.next = nil
 	list.length--
 
 	return val, nil
+}
+
+func (list *LinkedList[T]) Insert(index int, val T) error {
+	if index < 0 || index > list.length {
+		return fmt.Errorf("error: %s", "Index is out of range")
+	}
+
+	node := &listNode[T]{value: val}
+	cur := list.head
+	for i := 0; i < index; i++ {
+		cur = cur.next
+	}
+
+	if cur.next != nil {
+		node.next = cur.next
+	}
+
+	cur.next = node
+	list.length++
+
+	return nil
 }
 
 func (list *LinkedList[T]) Enqueue(val T) {
