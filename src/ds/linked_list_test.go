@@ -138,14 +138,14 @@ func TestLinkedListInsert(t *testing.T) {
 
 	err = list.Insert(0, 10)
 	assert.Nil(t, err)
-	assert.Equal(t, 1, list.Size())
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{10}))
 
 	list.Push(20)
 	list.Push(30)
 
 	err = list.Insert(1, 40)
 	assert.Nil(t, err)
-	assert.Equal(t, 4, list.Size())
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{10, 40, 20, 30}))
 
 	err = list.Insert(4, 50)
 	assert.Nil(t, err)
@@ -154,4 +154,38 @@ func TestLinkedListInsert(t *testing.T) {
 
 	err = list.Insert(6, 60)
 	assert.NotNil(t, err)
+}
+
+func TestLinkedListDelete(t *testing.T) {
+	var val int
+	var err error
+	list := NewLinkedList[int]()
+
+	val, err = list.Delete(0)
+	assert.NotNil(t, err)
+	assert.Equal(t, 0, val)
+
+	for i := 10; i < 70; i = i + 10 {
+		list.Push(i)
+	}
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{10, 20, 30, 40, 50, 60}))
+
+	val, err = list.Delete(2)
+	assert.Nil(t, err)
+	assert.Equal(t, 30, val)
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{10, 20, 40, 50, 60}))
+
+	val, err = list.Delete(0)
+	assert.Nil(t, err)
+	assert.Equal(t, 10, val)
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{20, 40, 50, 60}))
+
+	val, err = list.Delete(3)
+	assert.Nil(t, err)
+	assert.Equal(t, 60, val)
+	assert.True(t, reflect.DeepEqual(list.ToSlice(), []int{20, 40, 50}))
+
+	val, err = list.Delete(4)
+	assert.NotNil(t, err)
+	assert.Equal(t, 0, val)
 }

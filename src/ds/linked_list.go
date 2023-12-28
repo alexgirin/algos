@@ -130,6 +130,26 @@ func (list *LinkedList[T]) Dequeue() (T, error) {
 	return cur.value, nil
 }
 
+func (list *LinkedList[T]) Delete(index int) (val T, err error) {
+	if index < 0 || index > list.length-1 {
+		return list.head.value, fmt.Errorf("error: %s", "Index is out of range")
+	}
+
+	cur := list.head
+
+	for i := 0; i < index; i++ {
+		cur = cur.next
+	}
+
+	val = cur.next.value
+	toDelete := cur.next
+	cur.next = cur.next.next
+	toDelete.next = nil
+	list.length--
+
+	return val, nil
+}
+
 func (list *LinkedList[T]) Contains(val T) bool {
 	if list.isEmpty() {
 		return false
