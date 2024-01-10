@@ -31,12 +31,12 @@ func merge[T cmp.Ordered](left []T, right []T) []T {
 
 func MergeSort[T cmp.Ordered](array *[]T) []T {
 	length := len(*array)
+
 	if length <= 1 {
 		return *array
 	}
 
 	mid := length / 2
-
 	left := (*array)[:mid]
 	right := (*array)[mid:]
 
