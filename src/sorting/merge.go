@@ -4,7 +4,7 @@ import (
 	"cmp"
 )
 
-func merge[T cmp.Ordered](left []T, right []T) []T {
+func merge[T cmp.Ordered](left, right []T) []T {
 	var i, j int
 	lenLeft, lenRight := len(left), len(right)
 	lenResult := lenLeft + lenRight
@@ -40,5 +40,5 @@ func MergeSort[T cmp.Ordered](array *[]T) []T {
 	left := (*array)[:mid]
 	right := (*array)[mid:]
 
-	return merge(MergeSort[T](&left), MergeSort[T](&right))
+	return merge(MergeSort(&left), MergeSort(&right))
 }

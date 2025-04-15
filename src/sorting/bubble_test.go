@@ -37,7 +37,7 @@ func TestBubbleSort(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.title, func(t *testing.T) {
-			BubbleSort[int](&test.input)
+			BubbleSort(&test.input)
 			assert.True(t, reflect.DeepEqual(&test.input, &test.result))
 		})
 	}

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMergeSort(t *testing.T) {
+func TestQuickSort(t *testing.T) {
 	tests := []struct {
 		title  string
 		input  []int
@@ -37,7 +37,7 @@ func TestMergeSort(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.title, func(t *testing.T) {
-			result := MergeSort(&test.input)
+			result := QuickSort(&test.input)
 			assert.True(t, reflect.DeepEqual(&result, &test.result))
 		})
 	}
